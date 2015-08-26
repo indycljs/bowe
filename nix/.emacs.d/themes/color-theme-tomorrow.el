@@ -13,8 +13,8 @@
 ;;; Code:
 
 (defconst color-theme-tomorrow-colors
-  '((night . ((background . "#1d1f21")
-              (current-line . "#282a2e")
+  '((night . (;(background . "#1d1f21")
+              ;(current-line . "#282a2e")
               (selection . "#373b41")
               (foreground . "#c5c8c6")
               (comment . "#969896")
@@ -187,7 +187,7 @@ names to which it refers are bound."
      ;; Emacs interface
      (cursor ((,class (:background ,red))))
      (fringe ((,class (:background ,current-line))))
-     ;;(linum ((,class (:background ,current-line))))
+     (linum ((,class (:background ,current-line))))
      (linum ((,class (:foreground ,current-line))))
      (hl-line ((,class (:background ,current-line))))
      (border ((,class (:background ,current-line))))

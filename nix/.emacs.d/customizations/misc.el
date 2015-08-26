@@ -10,3 +10,5 @@
 
 ;; Go straight to scratch buffer on startup
 (setq inhibit-startup-message t)
+
+(global-set-key [(control x) (k)] 'kill-this-buffer)

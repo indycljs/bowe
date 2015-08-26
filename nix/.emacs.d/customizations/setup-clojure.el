@@ -79,4 +79,15 @@
      (define-key clojure-mode-map (kbd "C-c C-v") 'cider-start-http-server)
      (define-key clojure-mode-map (kbd "C-M-r") 'cider-refresh)
      (define-key clojure-mode-map (kbd "C-c u") 'cider-user-ns)
+     (define-key clojure-mode-map (kbd "M-<return>") 'cider-eval-last-sexp-to-repl)
+     (define-key clojure-mode-map (kbd "C-<return>") 'cider-eval-last-sexp)
      (define-key cider-mode-map (kbd "C-c u") 'cider-user-ns)))
+
+; ac-cider
+(add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+(add-hook 'cider-mode-hook 'ac-cider-setup)
+(add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+(eval-after-load "auto-complete"
+  '(progn
+     (add-to-list 'ac-modes 'cider-mode)
+     (add-to-list 'ac-modes 'cider-repl-mode)))

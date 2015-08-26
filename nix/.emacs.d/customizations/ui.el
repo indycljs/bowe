@@ -5,7 +5,7 @@
 ;; preferences
 
 ;; Turn off the menu bar at the top of each frame because it's distracting
-;(menu-bar-mode -1)
+(menu-bar-mode -1)
 (tool-bar-mode -1)
 
 ;; Show line numbers
@@ -30,7 +30,16 @@
 (load-theme 'tomorrow-night-bright t)
 
 ;; increase font size for better readability
-(set-face-attribute 'default nil :height 120)
+;; changed to 100 from 120 since I need more space
+;(set-face-attribute 'default nil :height 120)
+
+(set-face-attribute 'default nil :family "Inconsolata LGC" :height 120)
+(set-face-attribute 'mode-line nil :family "Terminus" :height 100)
+(set-face-attribute 'mode-line-buffer-id nil :family "Terminus" :height 100)
+(set-face-attribute 'mode-line-emphasis nil :family "Terminus" :height 100)
+(set-face-attribute 'mode-line-highlight nil :family "Terminus" :height 100)
+(set-face-attribute 'mode-line-inactive nil :family "Terminus" :height 100 :background "#111")
+(set-face-attribute 'minibuffer-prompt nil :family "Terminus" :height 100)
 
 ;; Uncomment the lines below by removing semicolons and play with the
 ;; values in order to set the width (in characters wide) and height
@@ -72,9 +81,49 @@
 ;; transparency!
 (set-frame-parameter (selected-frame) 'alpha '(85 85))
 (add-to-list 'default-frame-alist '(alpha 85 85))
-;; (add-to-list 'default-frame-alist '(font ))
 
-(set-face-attribute 'default nil :family "Inconsolata LGC" :height 120)
+(setq-default line-spacing 1)
 
 (winner-mode 1)
 (workgroups-mode 1)
+
+(win-switch-setup-keys-ijkl "\C-xo")
+;(win-switch-set-keys-arrow-ctrl 1)
+(setq win-switch-idle-time 3)
+
+;; These two lines are just examples
+;; (setq powerline-arrow-shape 'curve)
+;; (setq powerline-default-separator-dir '(right . left))
+;; These two lines you really need.
+(setq sml/theme 'dark)
+(sml/setup)
+
+;(let ((faces '(mode-line
+               ;mode-line-buffer-id
+               ;mode-line-emphasis
+               ;mode-line-highlight
+               ;mode-line-inactive)))
+     ;(mapc
+      ;(lambda (face) 
+       ;faces))
+
+(global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+(global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+
+(add-to-list 'after-make-frame-functions (lambda (frame)
+  (with-selected-frame frame
+    (set-face-attribute 'fringe nil :background nil)
+    (set-face-attribute 'linum nil :background nil :foreground "#888" :height 110)
+    (with-current-buffer (get-buffer " *Echo Area 0*")
+       (setq-local face-remapping-alist '((default (:family "Terminus" :height 100))))))))
+
+(add-hook 'minibuffer-setup-hook
+  (lambda ()
+    (make-local-variable 'face-remapping-alist)
+    (add-to-list 'face-remapping-alist '(default (:family "Terminus" :height 100)))))
+
+(defun on-after-init ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(add-hook 'window-setup-hook 'on-after-init)

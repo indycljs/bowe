@@ -46,6 +46,10 @@
 ;; for selecting buffer and file names
 (ido-ubiquitous-mode 1)
 
+; flx extension to ido
+(flx-ido-mode 1)
+(setq ido-use-faces nil)
+
 ;; Shows a list of buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
